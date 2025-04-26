@@ -1,6 +1,6 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -9,16 +9,16 @@
 body {
     font-family: monospace;
 }
+
 nav {
     padding: 25px 10px;
 }
 
 .king-gadget-nav {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     width: 100%;
-    gap: 25rem;
     margin: auto;
 }
 
@@ -29,7 +29,9 @@ nav {
 }
 
 header {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 19px;
 }
 
 nav ul {
@@ -41,8 +43,133 @@ nav ul {
 nav ul li {
     list-style: none;
     font-family: 'Poppins', sans-serif;
-  font-weight: 400; /* or 500 if you want a touch more emphasis */
+    font-weight: 400;
+    letter-spacing: 1px;
 }
+
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25px;
+    height: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.hamburger .bar {
+    height: 3px;
+    margin: 4px;
+    width: 100%;
+    background-color: black;
+    transition: all 0.3s ease-in-out;
+    border-radius: 5px;
+}
+
+/* Rotate animation */
+.hamburger.rotate .bar1 {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.rotate .bar2 {
+    opacity: 0;
+}
+
+.hamburger.rotate .bar3 {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.rotate {
+    transform: rotate(90deg);
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+.account-details {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    right: 0;
+    top: 58px;
+  }
+
+  .account-details a {
+    display: block;
+    padding: 0.5rem;
+    text-decoration: none;
+  }
+
+  span ol li {
+    list-style: none;
+  }
+
+  span ol li a {
+    text-decoration: none;
+    color: black;
+    text-align: center;
+  }
+ 
+
+@media (max-width: 670px) {
+    .hamburger {
+        display: block;
+        z-index: 3;
+    }
+
+    .rotate {
+        position: fixed;
+    }
+
+    .nav-content {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .nav-content.show {
+        position: absolute;
+        top: -16px;
+        right: 0px;
+        display: flex;
+    }
+
+    nav ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 25px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 2;
+        background: green;
+        overflow: hidden;
+    }
+
+    .king-gadget-nav {
+        justify-content: space-between;
+    }
+
+    .header {
+        gap: 10px;
+    }
+}
+
+
+
+
+
+
 
 .tabs button {
     border: none;
@@ -112,6 +239,9 @@ nav ul li {
 
 .sneaker-details .edition {
     padding: 10px 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 
 .sub-img {
@@ -135,17 +265,18 @@ nav ul li {
 
 .price-offer h1 {
     font-size: 30px;
-    font-family: 'Anton', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .discount {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Poppins', sans-serif;
 }
 
 .discount h1 {
-    padding: 5px;
+    padding: 3px;
     color: white;
     background: black;
     font-size: 16px;
@@ -159,8 +290,51 @@ nav ul li {
 
 .sneaker-details .old-price {
     font-weight: bold;
-    padding: 7px 0;
+    padding: 2px 0;
     text-decoration: line-through;
-    font-size: 17px;
+    font-size: 15px;
     color: #0000007d;
+    font-family: 'Poppins', sans-serif;
+}
+
+.icon-container {
+    display: flex;
+    gap: 20px;
+    /* Space between icons */
+}
+
+.icon-container .icon {
+    font-size: 0.8rem;
+    padding: 10px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.icon-container .icon:hover {
+    opacity: 0.5;
+}
+
+.icon:hover .account-details {
+    display: block;
+  }
+
+.fa-user {
+    background-color: #00000059;
+    color: white;
+}
+
+@media (max-width: 800px) {
+    .sneakers {
+        padding: 10px;
+    }
+    .sneaker-details, .sneaker-img {
+        width: 100%;
+    }
+    .sneaker-details p {
+        width: 100%;
+    }
 }

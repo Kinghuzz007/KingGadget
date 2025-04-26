@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -150,6 +150,82 @@
   });
 });
 
+  </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Font Awesome Cart & Profile</title>
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f4f4f4;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 0.5rem;
+      text-decoration: none;
+    }
+
+    .dropdown-toggle {
+      background-color: #f0f0f0;
+      border: none;
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+
+    .dropdown-toggle:hover {
+      background-color: #ccc;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dropdown">
+    <button class="dropdown-toggle" id="dropdownMenuButton">
+      <i class="fas fa-caret-down">x</i>
+      <span id="iconText">Options</span>
+    </button>
+
+    <div class="dropdown-menu" id="dropdownMenu">
+      <a href="#">Link</a>
+      <a href="#">Link</a>
+      <a href="#">Link</a>
+    </div>
+  </div>
+
+  <script>
+    const dropdownToggle = document.getElementById("dropdownMenuButton");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+
+    dropdownToggle.addEventListener('click', function(){
+      dropdownMenu.style.display = (dropdownMenu.style.display === "block") ? 'none' : 'block';
+    });
   </script>
 </body>
 </html>

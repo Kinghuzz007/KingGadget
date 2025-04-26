@@ -1,3 +1,11 @@
+// Mobile menu toggle with rotation
+function toggleMenu() {
+    const navLinks = document.getElementById('navLinks');
+    const hamburger = document.querySelector('.hamburger');
+    navLinks.classList.toggle('show');
+    hamburger.classList.toggle('rotate');
+      }
+
 // King Gadget image selector
 document.addEventListener("DOMContentLoaded", () => {
     const buttons = document.querySelectorAll('.tabs button');
