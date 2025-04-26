@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add to Cart Demo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+.product-list {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.product {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 4px;
+  width: 150px;
+  text-align: center;
+}
+.quantity {
+  width: 60px;
+  margin-top: 10px;
+}
+.add-to-cart {
+  display: block;
+  margin: 10px auto 0;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.cart-container {
+  margin-top: 20px;
+}
+#cart-button {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#cart-items {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.cart-item button {
+  margin-left: 5px;
+  padding: 2px 6px;
+  border: none;
+  background: #ddd;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.cart-item button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+</style>
+<body>
+  <div class="product-list">
+    <div class="product">
+      <p>Item 1</p>
+      <input type="number" class="quantity" data-item="Item 1" value="1" min="1" max="10">
+      <button class="add-to-cart" data-item="Item 1">Add to Cart</button>
+    </div>
+    <div class="product">
+      <p>Item 2</p>
+      <input type="number" class="quantity" data-item="Item 2" value="1" min="1" max="10">
+      <button class="add-to-cart" data-item="Item 2">Add to Cart</button>
+    </div>
+    <div class="product">
+      <p>Item 3</p>
+      <input type="number" class="quantity" data-item="Item 3" value="1" min="1" max="10">
+      <button class="add-to-cart" data-item="Item 3">Add to Cart</button>
+    </div>
+  </div>
+
+  <div class="cart-container">
+    <a href="cart.html" id="cart-button">Cart (<span id="cart-count">0</span>)</a>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+  const addToCartButtons = document.querySelectorAll('.add-to-cart');
+  const cartCount = document.getElementById('cart-count');
+  const quantityInputs = document.querySelectorAll('.quantity');
+
+  let cart = JSON.parse(localStorage.getItem('cart')) || {};
+
+  // Initialize inputs and count
+  updateQuantityInputs();
+  updateCartCount();
+
+  // Add to Cart button click
+  addToCartButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const item = button.getAttribute('data-item');
+      const qtyInput = document.querySelector(`.quantity[data-item=\"${item}\"]`);
+      let qty = parseInt(qtyInput.value) || 1;
+      qty = Math.min(Math.max(qty, 1), 10);
+      cart[item] = qty;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+    });
+  });
+
+  // Update inputs based on cart
+  function updateQuantityInputs() {
+    quantityInputs.forEach(input => {
+      const item = input.getAttribute('data-item');
+      if (cart[item]) {
+        input.value = cart[item];
+      } else {
+        input.value = 1;
+      }
+    });
+  }
+
+  function updateCartCount() {
+    const totalCount = Object.values(cart).reduce((sum, n) => sum + n, 0);
+    cartCount.textContent = totalCount;
+  }
+
+  // Listen for changes from cart.html
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'cart') {
+      cart = JSON.parse(e.newValue) || {};
+      updateQuantityInputs();
+      updateCartCount();
+    }
+  });
+});
+
+  </script>
+</body>
+</html>

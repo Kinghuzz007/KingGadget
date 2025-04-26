@@ -1,0 +1,165 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: monospace;
+}
+nav {
+    padding: 25px 10px;
+}
+
+.king-gadget-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 25rem;
+    margin: auto;
+}
+
+.header {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+header {
+    font-family: 'Playfair Display', serif;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}
+
+nav ul li {
+    list-style: none;
+    font-family: 'Poppins', sans-serif;
+  font-weight: 400; /* or 500 if you want a touch more emphasis */
+}
+
+.tabs button {
+    border: none;
+    border-radius: 8px;
+    background: #eee;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.tabs button.active {
+    filter: blur(1px);
+    border: 1px solid gray;
+}
+
+.tabs button:hover {
+    background: #ddd;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content img {
+    border-radius: 15px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.sneakers {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 70px 10px;
+}
+
+.sneaker-img {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 40%;
+    align-items: center;
+}
+
+.main-img {
+    max-width: 300px;
+}
+
+.sneaker-details {
+    width: 60%;
+    padding: 40px 0;
+}
+
+.sneaker-details span {
+    font-family: 'Dancing Script', cursive;
+    font-size: 20px;
+}
+
+.sneaker-details p {
+    width: 70%;
+    padding-bottom: 20px;
+    line-height: 3vh;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+
+.sneaker-details .edition {
+    padding: 10px 0;
+}
+
+.sub-img {
+    display: flex;
+    max-width: 292px;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.sub-img img {
+    height: 60px;
+    border-radius: 6px;
+}
+
+.price-offer {
+    display: flex;
+    justify-content: space-between;
+    width: 24%;
+    align-items: center;
+}
+
+.price-offer h1 {
+    font-size: 30px;
+}
+
+.discount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.discount h1 {
+    padding: 5px;
+    color: white;
+    background: black;
+    font-size: 16px;
+    margin: 0 4px;
+    border-radius: 5px;
+}
+
+.discount small {
+    font-size: 14px;
+}
+
+.sneaker-details .old-price {
+    font-weight: bold;
+    padding: 7px 0;
+    text-decoration: line-through;
+    font-size: 17px;
+    color: #0000007d;
+}
