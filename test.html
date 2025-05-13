@@ -153,79 +153,156 @@
   </script>
 </body>
 </html> -->
-
+<!-- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Font Awesome Cart & Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  body {
+    background-color: white;
+    color: black;
+  }
+  .dark-mode {
+    background-color: black;
+    color: white;
+  }
+  .dark-mode .king {
+    color: red;
+  }
+</style>
+<body>
+  <p>Life Of a Star</p>
+  <p class="king">King</p>
+  <button onclick="myFunction()">Toggle</button>
 
-  <!-- Font Awesome CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script>
+    function myFunction() {
+      var element = document.body;
+      element.classList.toggle("dark-mode");
+    }
+  </script>
+</body>
+</html> -->
 
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shopping Cart</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 40px;
-      background-color: #f4f4f4;
-    }
-
-    .dropdown {
-      position: relative;
-    }
-
-    .dropdown-menu {
-      display: none;
+    body { font-family: Arial; padding: 20px; }
+    .cart-wrapper { position: relative; float: right; }
+    .cart-icon { font-size: 24px; cursor: pointer; position: relative; }
+    .cart-count {
       position: absolute;
-      background-color: #f9f9f9;
-      min-width: 160px;
+      top: -8px; right: -10px;
+      background: red; color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 12px;
     }
 
-    .dropdown-menu a {
-      display: block;
-      padding: 0.5rem;
-      text-decoration: none;
+    .item { margin-bottom: 15px; display: flex; align-items: center; }
+    .qty-controls {
+      margin-left: 10px;
     }
 
-    .dropdown-toggle {
-      background-color: #f0f0f0;
-      border: none;
-      padding: 0.5rem;
-      cursor: pointer;
+    .qty-controls button {
+      margin: 0 2px;
+      padding: 4px 8px;
     }
 
-    .dropdown-toggle:hover {
-      background-color: #ccc;
-    }
-
-    .dropdown:hover .dropdown-menu {
-      display: block;
+    .qty-display {
+      display: inline-block;
+      width: 30px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
-  <div class="dropdown">
-    <button class="dropdown-toggle" id="dropdownMenuButton">
-      <i class="fas fa-caret-down">x</i>
-      <span id="iconText">Options</span>
-    </button>
-
-    <div class="dropdown-menu" id="dropdownMenu">
-      <a href="#">Link</a>
-      <a href="#">Link</a>
-      <a href="#">Link</a>
-    </div>
+<!-- Cart Icon -->
+<div class="cart-wrapper">
+  <div class="cart-icon" id="cart-icon">
+    🛒 <span class="cart-count" id="cart-count">0</span>
   </div>
+</div>
 
-  <script>
-    const dropdownToggle = document.getElementById("dropdownMenuButton");
-    const dropdownMenu = document.getElementById("dropdownMenu");
+<h2>Products</h2>
 
-    dropdownToggle.addEventListener('click', function(){
-      dropdownMenu.style.display = (dropdownMenu.style.display === "block") ? 'none' : 'block';
-    });
-  </script>
+<div class="item" data-item="Item A">
+  Item A - $10
+  <div class="qty-controls">
+    <button onclick="adjustQty('Item A', -1)">➖</button>
+    <span class="qty-display" id="qty-Item A">1</span>
+    <button onclick="adjustQty('Item A', 1)">➕</button>
+    <button onclick="addToCart('Item A')">Add to Cart</button>
+  </div>
+</div>
+
+<div class="item" data-item="Item B">
+  Item B - $15
+  <div class="qty-controls">
+    <button onclick="adjustQty('Item B', -1)">➖</button>
+    <span class="qty-display" id="qty-Item B">1</span>
+    <button onclick="adjustQty('Item B', 1)">➕</button>
+    <button onclick="addToCart('Item B')">Add to Cart</button>
+  </div>
+</div>
+
+<div class="item" data-item="Item C">
+  Item C - $20
+  <div class="qty-controls">
+    <button onclick="adjustQty('Item C', -1)">➖</button>
+    <span class="qty-display" id="qty-Item C">1</span>
+    <button onclick="adjustQty('Item C', 1)">➕</button>
+    <button onclick="addToCart('Item C')">Add to Cart</button>
+  </div>
+</div>
+
+<script>
+  let cart = JSON.parse(localStorage.getItem('cart')) || {};
+  const prices = {
+    "Item A": 10,
+    "Item B": 15,
+    "Item C": 20
+  };
+
+  const quantities = {
+    "Item A": 1,
+    "Item B": 1,
+    "Item C": 1
+  };
+
+  function updateCartCount() {
+    const count = Object.values(cart).reduce((a, b) => a + b, 0);
+    document.getElementById("cart-count").textContent = count;
+  }
+
+  function adjustQty(itemName, delta) {
+    quantities[itemName] = Math.max(1, (quantities[itemName] || 1) + delta);
+    document.getElementById(`qty-${itemName}`).textContent = quantities[itemName];
+  }
+
+  function addToCart(itemName) {
+    const qty = quantities[itemName];
+    cart[itemName] = (cart[itemName] || 0) + qty;
+    localStorage.setItem('cart', JSON.stringify(cart));
+    localStorage.setItem('prices', JSON.stringify(prices));
+    updateCartCount();
+  }
+
+  document.getElementById('cart-icon').addEventListener('click', () => {
+    window.location.href = 'cart.html';
+  });
+
+  updateCartCount();
+</script>
+
 </body>
 </html>
