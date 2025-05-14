@@ -196,113 +196,129 @@
   <title>Shopping Cart</title>
   <style>
     body { font-family: Arial; padding: 20px; }
+
+    /* Cart icon & count */
     .cart-wrapper { position: relative; float: right; }
     .cart-icon { font-size: 24px; cursor: pointer; position: relative; }
     .cart-count {
-      position: absolute;
-      top: -8px; right: -10px;
-      background: red; color: white;
-      border-radius: 50%;
-      padding: 2px 6px;
-      font-size: 12px;
+      position: absolute; top: -8px; right: -10px;
+      background: red; color: white; border-radius: 50%;
+      padding: 2px 6px; font-size: 12px;
     }
 
+    /* Product items */
     .item { margin-bottom: 15px; display: flex; align-items: center; }
-    .qty-controls {
-      margin-left: 10px;
-    }
-
-    .qty-controls button {
-      margin: 0 2px;
-      padding: 4px 8px;
-    }
-
+    .qty-controls { margin-left: 10px; }
+    .qty-controls button { margin: 0 2px; padding: 4px 8px; }
     .qty-display {
-      display: inline-block;
-      width: 30px;
-      text-align: center;
+      display: inline-block; width: 30px; text-align: center;
+    }
+
+    /* Notification toast */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #333;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 4px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease-in-out;
+      font-size: 14px;
+      z-index: 1000;
+    }
+    .notification.show {
+      opacity: 1;
+      pointer-events: auto;
     }
   </style>
 </head>
 <body>
 
-<!-- Cart Icon -->
-<div class="cart-wrapper">
-  <div class="cart-icon" id="cart-icon">
-    🛒 <span class="cart-count" id="cart-count">0</span>
+  <!-- Cart Icon -->
+  <div class="cart-wrapper">
+    <div class="cart-icon" id="cart-icon">
+      🛒 <span class="cart-count" id="cart-count">0</span>
+    </div>
   </div>
-</div>
 
-<h2>Products</h2>
+  <!-- Notification Toast -->
+  <div id="notification" class="notification">Added to cart!</div>
 
-<div class="item" data-item="Item A">
-  Item A - $10
-  <div class="qty-controls">
-    <button onclick="adjustQty('Item A', -1)">➖</button>
-    <span class="qty-display" id="qty-Item A">1</span>
-    <button onclick="adjustQty('Item A', 1)">➕</button>
-    <button onclick="addToCart('Item A')">Add to Cart</button>
+  <h2>Products</h2>
+
+  <div class="item" data-item="Item A">
+    Item A - $10
+    <div class="qty-controls">
+      <button onclick="adjustQty('Item A', -1)">➖</button>
+      <span class="qty-display" id="qty-Item A">1</span>
+      <button onclick="adjustQty('Item A', 1)">➕</button>
+      <button onclick="addToCart('Item A')">Add to Cart</button>
+    </div>
   </div>
-</div>
 
-<div class="item" data-item="Item B">
-  Item B - $15
-  <div class="qty-controls">
-    <button onclick="adjustQty('Item B', -1)">➖</button>
-    <span class="qty-display" id="qty-Item B">1</span>
-    <button onclick="adjustQty('Item B', 1)">➕</button>
-    <button onclick="addToCart('Item B')">Add to Cart</button>
+  <div class="item" data-item="Item B">
+    Item B - $15
+    <div class="qty-controls">
+      <button onclick="adjustQty('Item B', -1)">➖</button>
+      <span class="qty-display" id="qty-Item B">1</span>
+      <button onclick="adjustQty('Item B', 1)">➕</button>
+      <button onclick="addToCart('Item B')">Add to Cart</button>
+    </div>
   </div>
-</div>
 
-<div class="item" data-item="Item C">
-  Item C - $20
-  <div class="qty-controls">
-    <button onclick="adjustQty('Item C', -1)">➖</button>
-    <span class="qty-display" id="qty-Item C">1</span>
-    <button onclick="adjustQty('Item C', 1)">➕</button>
-    <button onclick="addToCart('Item C')">Add to Cart</button>
+  <div class="item" data-item="Item C">
+    Item C - $20
+    <div class="qty-controls">
+      <button onclick="adjustQty('Item C', -1)">➖</button>
+      <span class="qty-display" id="qty-Item C">1</span>
+      <button onclick="adjustQty('Item C', 1)">➕</button>
+      <button onclick="addToCart('Item C')">Add to Cart</button>
+    </div>
   </div>
-</div>
 
-<script>
-  let cart = JSON.parse(localStorage.getItem('cart')) || {};
-  const prices = {
-    "Item A": 10,
-    "Item B": 15,
-    "Item C": 20
-  };
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || {};
+    const prices = { "Item A": 10, "Item B": 15, "Item C": 20 };
+    const quantities = { "Item A": 1, "Item B": 1, "Item C": 1 };
 
-  const quantities = {
-    "Item A": 1,
-    "Item B": 1,
-    "Item C": 1
-  };
+    function updateCartCount() {
+      const count = Object.values(cart).reduce((a, b) => a + b, 0);
+      document.getElementById("cart-count").textContent = count;
+    }
 
-  function updateCartCount() {
-    const count = Object.values(cart).reduce((a, b) => a + b, 0);
-    document.getElementById("cart-count").textContent = count;
-  }
+    function adjustQty(itemName, delta) {
+      quantities[itemName] = Math.max(1, (quantities[itemName] || 1) + delta);
+      document.getElementById(`qty-${itemName}`).textContent = quantities[itemName];
+    }
 
-  function adjustQty(itemName, delta) {
-    quantities[itemName] = Math.max(1, (quantities[itemName] || 1) + delta);
-    document.getElementById(`qty-${itemName}`).textContent = quantities[itemName];
-  }
+    // Show a temporary toast notification
+    function showNotification(message) {
+      const toast = document.getElementById('notification');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    }
 
-  function addToCart(itemName) {
-    const qty = quantities[itemName];
-    cart[itemName] = (cart[itemName] || 0) + qty;
-    localStorage.setItem('cart', JSON.stringify(cart));
-    localStorage.setItem('prices', JSON.stringify(prices));
+    function addToCart(itemName) {
+      const qty = quantities[itemName];
+      cart[itemName] = (cart[itemName] || 0) + qty;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      localStorage.setItem('prices', JSON.stringify(prices));
+      updateCartCount();
+      showNotification(`✔️ ${itemName} added to cart`);
+    }
+
+    document.getElementById('cart-icon').addEventListener('click', () => {
+      window.location.href = 'cart.html';
+    });
+
+    // initialize
     updateCartCount();
-  }
-
-  document.getElementById('cart-icon').addEventListener('click', () => {
-    window.location.href = 'cart.html';
-  });
-
-  updateCartCount();
-</script>
+  </script>
 
 </body>
 </html>

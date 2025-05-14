@@ -19,6 +19,14 @@ body {
     color: white;
 }
 
+.dark-mode .quantity-toggle {
+    background-color: white;
+}
+
+.dark-mode .qty-display {
+    color: black;
+}
+
 nav {
     padding: 25px 10px;
 }
@@ -164,7 +172,7 @@ nav ul li a {
     border-radius: 50%;
 }
 
-.menu a{
+.menu a {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -186,6 +194,7 @@ nav ul li a {
 hr {
     border: 1px solid grey;
 }
+
 @media (max-width: 670px) {
     .hamburger {
         display: block;
@@ -479,7 +488,7 @@ hr {
 .price-offer {
     display: flex;
     justify-content: space-between;
-    width: 24%;
+    width: 22%;
     align-items: center;
 }
 
@@ -499,7 +508,7 @@ hr {
     padding: 3px;
     color: white;
     background: black;
-    font-size: 16px;
+    font-size: 14px;
     margin: 0 4px;
     border-radius: 5px;
 }
@@ -512,7 +521,7 @@ hr {
     font-weight: bold;
     padding: 2px 0;
     text-decoration: line-through;
-    font-size: 15px;
+    font-size: 13px;
     color: gray;
     font-family: 'Poppins', sans-serif;
 }
@@ -558,4 +567,48 @@ hr {
     .sneaker-details p {
         width: 100%;
     }
+}
+
+.qty-controls {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    align-items: center;
+}
+
+.quantity-toggle {
+    background: #e5e5e5;
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.quantity-toggle button {
+    border: none;
+    background: transparent;
+}
+
+.qty-controls .cart-button {
+    width: 70%;
+}
+
+.qty-controls .cart-button button {
+    width: 100%;
+    height: 37px;
+    border: none;
+    border-radius: 5px;
+    background: #ff7947;
+}
+
+.item {
+    width: 50%;
+    margin: 15px 0;
+}
+
+.sneaker-details .qty-display {
+    font-family: 'Poppins', sans-serif;
+        font-size: 18px;
+    font-weight: bold;
 }

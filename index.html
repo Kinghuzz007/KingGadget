@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>King's Gadget Company</title>
@@ -9,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
 
     <nav>
@@ -18,7 +20,7 @@
                     <div class="bar bar1"></div>
                     <div class="bar bar2"></div>
                     <div class="bar bar3"></div>
-                  </div>
+                </div>
                 <header>KingGadget</header>
                 <div class="nav-content" id="navLinks">
                     <ul>
@@ -31,22 +33,24 @@
             </div>
             <div class="contact-details">
                 <div class="icon-container">
-                    <span class="fa fa-shopping-cart icon"></span>
+                    <div class="cart-icon" id="cart-icon">
+                        <span id="cart-count" class="fa fa-shopping-cart icon"></span>
+                    </div>
                     <span class="fa fa-user icon" id="dropdownMenuButton">
                         <span class="account-details" id="dropdownMenu">
                             <div class="user-details">
                                 <div class="acct-details">
-                                    <span style="width: 14px;" class="fa fa-user profile"></span> 
+                                    <span style="width: 14px;" class="fa fa-user profile"></span>
                                     <p>King Huzz</p>
                                 </div>
-                                
+
                                 <hr>
                                 <div class="mode">
                                     <div class="dark-mode-toggle">
                                         <button onclick="darkMode()">Dark Mode</button>
                                     </div>
 
-                                    <script> 
+                                    <script>
                                         function darkMode() {
                                             var element = document.body;
                                             element.classList.toggle("dark-mode");
@@ -58,7 +62,7 @@
                                     <div class="menu">
                                         <a href="#" class="menu">
                                             <div class="details-menu">
-                                                <span class="fa fa-user"></span> 
+                                                <span class="fa fa-user"></span>
                                                 <p>King Huzz</p>
                                             </div>
                                             <div>
@@ -69,7 +73,7 @@
                                     <div class="menu">
                                         <a href="#" class="menu">
                                             <div class="details-menu">
-                                                <span class="fa fa-user"></span> 
+                                                <span class="fa fa-user"></span>
                                                 <p>King Huzz</p>
                                             </div>
                                             <div>
@@ -80,7 +84,7 @@
                                     <div class="menu">
                                         <a href="#" class="menu">
                                             <div class="details-menu">
-                                                <span class="fa fa-user"></span> 
+                                                <span class="fa fa-user"></span>
                                                 <p>King Huzz</p>
                                             </div>
                                             <div>
@@ -91,7 +95,7 @@
                                     <div class="menu">
                                         <a href="#" class="menu">
                                             <div class="details-menu">
-                                                <span class="fa fa-user"></span> 
+                                                <span class="fa fa-user"></span>
                                                 <p>King Huzz</p>
                                             </div>
                                             <div>
@@ -107,15 +111,15 @@
                             </div>
                         </span>
                     </span>
-                  </div>
-                  <script>
+                </div>
+                <script>
                     const dropdownToggle = document.getElementById("dropdownMenuButton");
                     const dropdownMenu = document.getElementById("dropdownMenu");
-                
-                    dropdownToggle.addEventListener('click', function(){
-                      dropdownMenu.style.display = (dropdownMenu.style.display === "block") ? 'none' : 'block';
+
+                    dropdownToggle.addEventListener('click', function () {
+                        dropdownMenu.style.display = (dropdownMenu.style.display === "block") ? 'none' : 'block';
                     });
-                  </script>
+                </script>
             </div>
         </div>
     </nav>
@@ -124,16 +128,21 @@
         <div class="sneakers">
             <div class="sneaker-img">
                 <div class="main-img">
-                    <div id="div1" class="tab-content active"><img src="images/image-product-1.jpg" alt="" width="300px"></div>
+                    <div id="div1" class="tab-content active"><img src="images/image-product-1.jpg" alt=""
+                            width="300px"></div>
                     <div id="div2" class="tab-content"><img src="images/image-product-2.jpg" alt="" width="300px"></div>
                     <div id="div3" class="tab-content"><img src="images/image-product-3.jpg" alt="" width="300px"></div>
                     <div id="div4" class="tab-content"><img src="images/image-product-4.jpg" alt="" width="300px"></div>
                 </div>
                 <div class="sub-img tabs">
-                    <button data-target="div1" class="active"><img src="images/image-product-1-thumbnail.jpg" alt="" width="65px"></button>
-                    <button data-target="div2"><img src="images/image-product-2-thumbnail.jpg" alt="" width="65px"></button>
-                    <button data-target="div3"><img src="images/image-product-3-thumbnail.jpg" alt="" width="65px"></button>
-                    <button data-target="div4"><img src="images/image-product-4-thumbnail.jpg" alt="" width="65px"></button>
+                    <button data-target="div1" class="active"><img src="images/image-product-1-thumbnail.jpg" alt=""
+                            width="65px"></button>
+                    <button data-target="div2"><img src="images/image-product-2-thumbnail.jpg" alt=""
+                            width="65px"></button>
+                    <button data-target="div3"><img src="images/image-product-3-thumbnail.jpg" alt=""
+                            width="65px"></button>
+                    <button data-target="div4"><img src="images/image-product-4-thumbnail.jpg" alt=""
+                            width="65px"></button>
                 </div>
             </div>
             <div class="sneaker-details">
@@ -149,7 +158,57 @@
                         <small>off</small>
                     </div>
                 </div>
-                <span    class="old-price">$210</span  >
+                <span class="old-price">$210</span>
+                <div class="item" data-item="Item B">
+                    <div class="qty-controls">
+                        <div class="quantity-toggle">
+                            <button onclick="adjustQty('Item B', -1)">➖</button>
+                            <span class="qty-display" id="qty-Item B">1</span>
+                            <button onclick="adjustQty('Item B', 1)">➕</button>
+                        </div>
+                        <div class="cart-button">
+                            <button onclick="addToCart('Item B')">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    let cart = JSON.parse(localStorage.getItem('cart')) || {};
+                    const prices = {
+                        "Item A": 10,
+                        "Item B": 15,
+                        "Item C": 20
+                    };
+
+                    const quantities = {
+                        "Item A": 1,
+                        "Item B": 1,
+                        "Item C": 1
+                    };
+
+                    function updateCartCount() {
+                        const count = Object.values(cart).reduce((a, b) => a + b, 0);
+                        document.getElementById("cart-count").textContent = count;
+                    }
+
+                    function adjustQty(itemName, delta) {
+                        quantities[itemName] = Math.max(1, (quantities[itemName] || 1) + delta);
+                        document.getElementById(`qty-${itemName}`).textContent = quantities[itemName];
+                    }
+
+                    function addToCart(itemName) {
+                        const qty = quantities[itemName];
+                        cart[itemName] = (cart[itemName] || 0) + qty;
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        localStorage.setItem('prices', JSON.stringify(prices));
+                        updateCartCount();
+                    }
+
+                    document.getElementById('cart-icon').addEventListener('click', () => {
+                        window.location.href = 'cart.html';
+                    });
+
+                    updateCartCount();
+                </script>
             </div>
         </div>
     </section>
@@ -158,13 +217,14 @@
         <span class="prev">&#10094;</span>
         <span class="next">&#10095;</span>
         <div class="modal-content">
-          <img id="modalImage" src="" alt="">
+            <img id="modalImage" src="" alt="">
         </div>
         <div class="modal-thumbnails">
-          <!-- Thumbnails will go here -->
+            <!-- Thumbnails will go here -->
         </div>
-      </div>
+    </div>
 
 
 </body>
+
 </html>
